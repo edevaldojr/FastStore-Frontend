@@ -15,6 +15,10 @@ export class ProductService {
     return this.http.post<Product[]>(`${API_CONFIG.baseUrl}/products/all`, pageControl);
   }
 
+  findAllByCategory(pageControl: PageControl, categoryId: number) : Observable<Product[]> {
+    return this.http.post<Product[]>(`${API_CONFIG.baseUrl}/products/` + categoryId, pageControl);
+  }
+
   findById(productId: number) : Observable<Product[]> {
     return this.http.get<Product[]>(`${API_CONFIG.baseUrl}/products/`+ productId);
   }

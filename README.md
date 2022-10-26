@@ -38,3 +38,4 @@ Repositório Front-end TCC
 23 Oct - Criando serviço de produtos e organizando pastas
 25 Oct - Criando services de produtos e categorias
 25 Oct - Listando produtos e categorias cadastrado no sistema
+26 Oct - Paginando produtos e buscando por categoria

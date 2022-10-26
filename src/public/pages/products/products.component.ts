@@ -15,13 +15,15 @@ export class ProductsComponent implements OnInit {
   products: Product[];
   categories: Category[];
   pageControl: PageControl = new PageControl();
+  categoryId: number;
+
   constructor(private productService: ProductService,
     private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.pageControl.order = 'DESC';
     this.pageControl.page = 0;
-    this.pageControl.pageSize = 10;
+    this.pageControl.pageSize = 1;
     this.pageControl.count = 0;
     this.getProducts();
     this.getCategories();
@@ -30,15 +32,30 @@ export class ProductsComponent implements OnInit {
   getProducts(){
     this.productService.findAll(this.pageControl).subscribe((response: any)=>{
       this.products = response.content;
+      this.pageControl.count = response.totalElements;
+      this.pageControl.page = response.pageable.pageNumber;
     });
-
   }
 
   getCategories(){
     this.categoryService.findAll().subscribe((response: any)=>{
       this.categories = response;
     });
-
   }
 
+  getProductsByCategory(categoryId: number){
+    this.categoryId = categoryId;
+    this.productService.findAllByCategory(this.pageControl, this.categoryId).subscribe((response: any)=>{
+      this.products = response.content;
+      this.pageControl.count = response.totalElements;
+      this.pageControl.page = response.pageable.pageNumber;
+    });
+  }
+
+  pageEvent($event:any) {
+    this.pageControl.page = $event.pageIndex;
+    this.pageControl.pageSize = $event.pageSize;
+    localStorage.setItem('productsLimit', $event.pageSize);
+    this.getProducts();
+  }
 }

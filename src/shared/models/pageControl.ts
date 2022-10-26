@@ -1,7 +1,7 @@
 export class PageControl {
-  pageSize: Number = 10;
+  pageSize: number = 10;
   order: 'DESC' | 'ASC';
   search: string;
-  page: Number = 0;
+  page: number = 0;
   count: number;
 }

@@ -24,6 +24,9 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { PaginatorPtbr } from 'src/shared/models/paginator';
+
 
 registerLocaleData(localePt);
 
@@ -50,7 +53,8 @@ registerLocaleData(localePt);
     MatFormFieldModule,
     MatCardModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [
     ProductService,
@@ -58,8 +62,13 @@ registerLocaleData(localePt);
     {
       provide: LOCALE_ID,
       useValue: "pt-BR"
-    }
+    },
+    { provide: 'LOCALSTORAGE', useFactory: getLocalStorage },
+    { provide: MatPaginatorIntl, useClass: PaginatorPtbr },
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function getLocalStorage() {
+  return (typeof window !== "undefined") ? window.localStorage : null;
+}
