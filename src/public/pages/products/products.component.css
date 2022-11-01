@@ -1,8 +1,17 @@
 body{
   background:#E0E0E0;
 }
-.productImg{
+.productImg {
   width :100%;
+  max-width: 240px;
+  max-height: 280px;
+  min-width: 120px;
+  min-height: 218px;
+ }
+.productCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .details {
           border: 1.5px solid grey;

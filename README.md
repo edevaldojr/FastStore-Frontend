@@ -39,3 +39,8 @@ Repositório Front-end TCC
 25 Oct - Criando services de produtos e categorias
 25 Oct - Listando produtos e categorias cadastrado no sistema
 26 Oct - Paginando produtos e buscando por categoria
+29 Oct - Criando página de detalhes do produto, fazendo ela ser dinâmida.
+31 Oct - Trazendo categorias para tela inicial, fotos ainda estaticas
+31 0ct - Colocando um path "/produtos/id" para busca de produtos para poder filtrar por categorias através do path
+31 Oct - Arrumando navegação para produtos pelo header
+

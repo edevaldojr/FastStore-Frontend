@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CategoryService } from './../shared/services/category.service';
 import { ProductService } from './../shared/services/product.service';
 import { routing } from './app.routing';
@@ -22,10 +23,12 @@ import { SignupComponent } from '../public/pages/signup/signup.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import { PaginatorPtbr } from 'src/shared/models/paginator';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 
 registerLocaleData(localePt);
@@ -54,7 +57,11 @@ registerLocaleData(localePt);
     MatCardModule,
     routing,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule,
+    CommonModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [
     ProductService,

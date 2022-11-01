@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/shared/models/product';
 import { ProductService } from 'src/shared/services/product.service';
 import { CategoryService } from 'src/shared/services/category.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -16,16 +17,24 @@ export class ProductsComponent implements OnInit {
   categories: Category[];
   pageControl: PageControl = new PageControl();
   categoryId: number;
+  id: string;
 
-  constructor(private productService: ProductService,
-    private categoryService: CategoryService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private categoryService: CategoryService) {
+      this.router = router;
+    }
 
   ngOnInit(): void {
     this.pageControl.order = 'DESC';
     this.pageControl.page = 0;
     this.pageControl.pageSize = 1;
     this.pageControl.count = 0;
-    this.getProducts();
+
+    this.id = this.route.snapshot.params['id'];
+
+    this.verifyHasCategory();
     this.getCategories();
   }
 
@@ -56,6 +65,23 @@ export class ProductsComponent implements OnInit {
     this.pageControl.page = $event.pageIndex;
     this.pageControl.pageSize = $event.pageSize;
     localStorage.setItem('productsLimit', $event.pageSize);
-    this.getProducts();
+    if (this.id!="0") {
+      this.getProductsByCategory(Number(this.id));
+     } else{
+       this.getProducts();
+     }
+  }
+
+  alterRoute(id: number){
+    this.router.navigate(['products', id]);
+    setTimeout(() => { this.ngOnInit(); }, 2);
+  }
+
+  verifyHasCategory(){
+    if (this.id!="0") {
+      this.getProductsByCategory(Number(this.id));
+     } else{
+       this.getProducts();
+     }
   }
 }
