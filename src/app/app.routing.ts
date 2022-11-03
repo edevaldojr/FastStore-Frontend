@@ -1,3 +1,4 @@
+import { ProfileComponent } from './../public/pages/profile/profile.component';
 import { ProductDetailsComponent } from './../public/pages/product-details/product-details.component';
 import { ProductsComponent } from '../public/pages/products/products.component';
 import { SigninComponent } from '../public/pages/signin/signin.component';
@@ -8,6 +9,7 @@ import { ModuleWithProviders } from '@angular/core';
 const APP_ROUTES: Routes = [
   { path: '', component: HomeComponent},
   { path: 'login', component: SigninComponent},
+  { path: 'profile', component: ProfileComponent},
   { path: 'products/:id', component: ProductsComponent},
   { path: 'product-detail/:id', component: ProductDetailsComponent},
 ];

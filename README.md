@@ -31,16 +31,20 @@ Repositório Front-end TCC
 
 ----------Historico de desenvolvimento----------
 
-17 Oct - Iniciando projeto Front-ent
-17 Oct - Criando footer e iniciando header
-20 Oct - Criando página inicial
-20 Oct - Criando modelos
-23 Oct - Criando serviço de produtos e organizando pastas
-25 Oct - Criando services de produtos e categorias
-25 Oct - Listando produtos e categorias cadastrado no sistema
-26 Oct - Paginando produtos e buscando por categoria
-29 Oct - Criando página de detalhes do produto, fazendo ela ser dinâmida.
-31 Oct - Trazendo categorias para tela inicial, fotos ainda estaticas
-31 0ct - Colocando um path "/produtos/id" para busca de produtos para poder filtrar por categorias através do path
-31 Oct - Arrumando navegação para produtos pelo header
+17 Oct - Iniciando projeto Front-ent <br />
+17 Oct - Criando footer e iniciando header <br />
+20 Oct - Criando página inicial <br />
+20 Oct - Criando modelos <br />
+23 Oct - Criando serviço de produtos e organizando pastas <br />
+25 Oct - Criando services de produtos e categorias <br />
+25 Oct - Listando produtos e categorias cadastrado no sistema <br />
+26 Oct - Paginando produtos e buscando por categoria <br />
+29 Oct - Criando página de detalhes do produto, fazendo ela ser dinâmida. <br />
+31 Oct - Trazendo categorias para tela inicial, fotos ainda estaticas <br />
+31 0ct - Colocando um path "/produtos/id" para busca de produtos para poder filtrar por categorias através do path <br />
+31 Oct - Arrumando navegação para produtos pelo header <br />
+02 Nov - Criando página de login, integrando com backend. Apos realizar login armazena em um localStorage os dados como email e token de autenticação <br />
+03 Nov - Criando Tela de perfil do consumidor, trazendo os dados do back-end e espondo na tela <br />
+03 Nov - Arrumando botão de perfil, caso esteja logado é um dropdown com perfil e logout, caso n esteja o botão é de entrar. <br />
+03 Nov - Logout funcional. <br />
 

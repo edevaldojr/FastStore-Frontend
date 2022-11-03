@@ -6,8 +6,8 @@ export interface Order {
   id: number;
   status: OrderStatus
   payment: PaymentDTO;
-  itens: OrderProductsDTO;
+  orderProducts: OrderProductsDTO[];
   product: RefDTO,
-
+  totalValue: number;
 }
 

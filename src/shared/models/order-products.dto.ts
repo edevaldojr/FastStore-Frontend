@@ -6,5 +6,5 @@ export interface OrderProductsDTO {
   unityValue: number;
   product: Product;
   stock: Stock;
-
+  subTotal: number,
 }

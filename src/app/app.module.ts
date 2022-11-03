@@ -1,3 +1,7 @@
+import { OrderService } from './../shared/services/order.service';
+import { UserService } from './../shared/services/user.service';
+import { StorageService } from './../shared/services/storage.service';
+import { AuthService } from './../shared/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from './../shared/services/category.service';
 import { ProductService } from './../shared/services/product.service';
@@ -25,11 +29,12 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorPtbr } from 'src/shared/models/paginator';
-import {MatSelectModule} from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from '../public/pages/profile/profile.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 registerLocaleData(localePt);
 
@@ -43,7 +48,8 @@ registerLocaleData(localePt);
     HeaderPageComponent,
     ProductDetailsComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,9 @@ registerLocaleData(localePt);
     RouterModule,
     CommonModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   providers: [
     ProductService,
@@ -72,6 +80,10 @@ registerLocaleData(localePt);
     },
     { provide: 'LOCALSTORAGE', useFactory: getLocalStorage },
     { provide: MatPaginatorIntl, useClass: PaginatorPtbr },
+    AuthService,
+    StorageService,
+    UserService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

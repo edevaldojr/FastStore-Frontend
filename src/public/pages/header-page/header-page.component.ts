@@ -1,5 +1,7 @@
+import { AuthService } from 'src/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/shared/services/storage.service';
 
 @Component({
   selector: 'app-header-page',
@@ -8,13 +10,33 @@ import { Router } from '@angular/router';
 })
 export class HeaderPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  isLogged: boolean = false;
+
+  constructor(private router: Router,
+    private storage: StorageService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    let localUser = this.storage.getLocalUser();
+    if(localUser == null){
+      this.isLogged == false;
+    } else {
+      this.isLogged = true;
+    }
   }
 
   navigateToProduct() {
     this.router.navigate(['products',0])
+  }
+
+  selectButton(page: string){
+    console.log("passo")
+    location.href = page;
+  }
+
+  logout(){
+    this.authService.logout();
+    this.selectButton("login");
   }
 
 }

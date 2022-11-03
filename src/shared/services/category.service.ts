@@ -1,10 +1,8 @@
 import { Category } from './../models/category';
-import { PageControl } from '../models/pageControl';
 import { API_CONFIG } from "src/config/api.config";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Product } from "../models/product";
 
 @Injectable()
 export class CategoryService {

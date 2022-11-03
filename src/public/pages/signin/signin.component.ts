@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CredentialDTO } from 'src/shared/models/credentials.dto';
+import { AuthService } from 'src/shared/services/auth.service';
 
 
 @Component({
@@ -7,22 +10,46 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent {
+
+  credetialError: boolean = false;
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
   });
 
-  constructor() { }
+  creds : CredentialDTO = {
+    email: "",
+    password: ""
+  };
+
+  constructor( public auth: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
-  submit() {
-    if (this.form.valid) {
+  onSubmit() {
 
+    if (this.form.valid) {
+      this.creds.email = this.form.value.email;
+      this.creds.password = this.form.value.password;
+      this.login();
     }
   }
 
+  login(){
+      this.auth.authenticated(this.creds)
+      .subscribe(response => {
+        this.credetialError = false;
+        ;
+        this.auth.successfulLogin(response.headers.get('Authorization') as string);
+        location.href = "";
+      },
+      error =>{
+        this.credetialError = true;
+      });
+  }
 
 }

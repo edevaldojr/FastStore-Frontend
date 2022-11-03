@@ -1,0 +1,5 @@
+export enum Perfil {
+  ADMIN = "ROLE_ADMIN",
+  EMPLOYEE = "ROLE_EMPLOYEE",
+  CONSUMER = "ROLE_CONSUMER"
+}
