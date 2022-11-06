@@ -73,4 +73,16 @@ export class BlueCrowValidators {
     return false;
   }
 
+  static isValidDateBirthday(control: AbstractControl): Validators {
+    if (control.value) {
+      const isValid = new RegExp(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
+      )
+      .test(control.value)
+      if (isValid) {
+        return false;
+      }
+    }
+    return { birthDateNotValid: true };
+  }
+
 }

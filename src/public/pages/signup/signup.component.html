@@ -1,1 +1,84 @@
-<p>signup works!</p>
+<div class="container-fluid">
+  <div class="row no-gutter">
+      <!-- The image half -->
+      <div class="col-md-6 d-none d-md-flex bg-image"><img src="/assets/imgs/LogoLogin.png" alt="Logo Lopestyle"></div>
+      <!-- The content half -->
+      <div class="col-md-6 bg-light">
+          <div class="login d-flex align-items-center py-5">
+              <!-- Demo content-->
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-10 col-xl-7 mx-auto">
+                          <h3 class="display-4">Registrar</h3>
+                          <form [formGroup]="formGroup" (ngSubmit)="signupUser()">
+                              <div class="form-group mb-3">
+                                  <input id="inputfirstName" type="text" formControlName="firstName" placeholder="Nome" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('firstName')?.touched && !this.formGroup.get('firstName')?.valid || !this.formGroup.get('firstName')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório, deve ter entre 2 a 120 catacteres.
+                              </p>
+                              <div class="form-group mb-3">
+                                  <input id="inputLastName" type="lastName" formControlName="lastName" placeholder="Sobrenome" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('lastName')?.touched && !this.formGroup.get('lastName')?.valid || !this.formGroup.get('lastName')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório, deve ter entre 3 a 120 catacteres.
+                              </p>
+                              <div class="form-group mb-3">
+                                <input id="inputCpf" type="text" [textMask]="cpfMask" placeholder="CPF" formControlName="cpf" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('cpf')?.touched && !this.formGroup.get('cpf')?.valid || !this.formGroup.get('cpf')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório, deve conter um cpf válido.
+                              </p>
+                              <div class="form-group mb-3">
+                                <input id="inputEmail" type="email" formControlName="email"  placeholder="Endereço de Email" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('email')?.touched && !this.formGroup.get('email')?.valid || !this.formGroup.get('email')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório, deve conter um email válido.
+                              </p>
+                              <div class="form-group mb-3">
+                                  <input id="inputPhoneNumber" type="text" [textMask]="phoneMask" formControlName="phoneNumber" placeholder="Celular" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('phoneNumber')?.touched && !this.formGroup.get('phoneNumber')?.valid || !this.formGroup.get('phoneNumber')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório, deve conter um número de celular válido.
+                              </p>
+                              <div class="text-center">
+                                <h3 class="text-center">Sexo</h3>
+                                <mat-radio-group aria-label="Sexo" color="primary" formControlName="sexType">
+                                  <mat-radio-button [value]="1">Masculino</mat-radio-button>&nbsp;
+                                  <mat-radio-button [value]="2">Feminino</mat-radio-button>&nbsp;
+                                  <mat-radio-button [value]="3">Outro</mat-radio-button>
+                                </mat-radio-group>
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('sexType')?.touched && !this.formGroup.get('sexType')?.valid || !this.formGroup.get('sexType')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório
+                              </p>
+                              <br>
+                              <div class="form-group mb-3">
+                                <input id="birthDate" type="text" formControlName="birthDate" [textMask]="dateMask" placeholder="Data de nascimento" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                              </div>
+                              <p  class="text-danger" *ngIf="this.formGroup.get('birthDate')?.touched && !this.formGroup.get('birthDate')?.valid || !this.formGroup.get('birthDate')?.valid && !this.isValidRegister && this.isValidRegister != undefined">
+                                Campo obrigatório, deve conter uma data válida.
+                              </p>
+                              <div class="form-group mb-3">
+                                <input id="inputPassword" type="password" placeholder="Senha" formControlName="password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                              </div>
+                              <div class="form-group mb-3">
+                                <input id="inputPasswordConfirmation" type="password" placeholder="Confirme sua senha" formControlName="confirmPassword" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                              </div>
+                              <br><br>
+                              <p  class="text-danger" *ngIf="this.isValidRegister != undefined && !this.isValidRegister">
+                                Preencha todos os campos corretamente.
+                              </p>
+                              <p  class="text-danger" *ngIf="this.emailAlreadyRegistred">
+                                Email já cadastrado.
+                              </p>
+                              <button type="submit" class="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm"  style="background-color: #f8c0f5;" >Criar conta</button>
+                              <button type="submit" class="btn btn- btn-block text-uppercase mb-2 rounded-pill shadow-sm"  style="background-color: #82F4DC;">voltar</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div><!-- End -->
+  </div>
+</div>

@@ -35,6 +35,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from '../public/pages/profile/profile.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MaskService } from 'src/shared/masks/mask.service';
+import { TextMaskModule } from 'angular2-text-mask';
+
 
 registerLocaleData(localePt);
 
@@ -69,7 +75,11 @@ registerLocaleData(localePt);
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    TextMaskModule
   ],
   providers: [
     ProductService,
@@ -83,7 +93,10 @@ registerLocaleData(localePt);
     AuthService,
     StorageService,
     UserService,
-    OrderService
+    OrderService,
+    MaskService,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   bootstrap: [AppComponent]
 })

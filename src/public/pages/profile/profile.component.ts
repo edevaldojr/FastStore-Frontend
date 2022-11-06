@@ -59,12 +59,15 @@ export class ProfileComponent implements OnInit {
   }
 
   checkSexType(){
-    if(this.consumer.sexo == SexType.MALE){
+    console.log(this.consumer.sexo.toString())
+    console.log(SexType.FEMININO)
+    if(this.consumer.sexo === SexType.MASCULINO){
+      this.sexType = 0;
+    } else if(this.consumer.sexo === SexType.FEMININO){
+      console.log("sss")
       this.sexType = 1;
-    } else if(this.consumer.sexo == SexType.FEMALE){
-      this.sexType = 2;
     } else {
-      this.sexType = 3;
+      this.sexType = 2;
     }
   }
 

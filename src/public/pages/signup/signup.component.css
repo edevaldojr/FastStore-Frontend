@@ -1,0 +1,11 @@
+.login,
+.image {
+  min-height: 100vh;
+}
+.bg-image {
+  background-size: cover;
+  background-position: center center;
+}
+.inputPassword{
+  color: #f8c0f5;
+}

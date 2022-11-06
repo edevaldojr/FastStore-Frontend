@@ -7,26 +7,31 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 navbar-right">
               <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" aria-current="page" [routerLink]="['']" href="/">Início</a></li>
               <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" href="/products/0" [routerLink]="['products/0']" (click)="navigateToProduct()">Produtos</a></li>
-
         </ul>
-        <div class="col-6 d-flex justify-content text-center">
-          <button mat-button mat-icon-button [matMenuTriggerFor]="belowMenu" *ngIf="isLogged">
-            <mat-icon>person</mat-icon>
-          </button>
-          <mat-menu #belowMenu="matMenu" yPosition="below">
-            <button mat-menu-item (click)="selectButton('profile')">Perfil</button>
-            <button mat-menu-item (click)="logout()">Sair</button>
-          </mat-menu>
-         <div class="col-2" *ngIf="!isLogged">
-            <button mat-icon-button (click)="selectButton('login')" >
-              <a >Entrar</a>
-            </button>
-          </div>
-          <button class="col-4 btn btn-outline-dark" type="submit">
+        <div class="col-6 d-flex justify-content text-center" id="navbarSupportedContent" style="display: flex; justify-content: flex-end">
+          <ul class="navbar-nav ">
+            <button class="btn btn-outline-dark nav-item" type="submit">
               <i class="bi-cart-fill me-1"></i>
               Carrinho
               <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-          </button>
+            </button>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <button mat-button mat-icon-button class="nav-item" [matMenuTriggerFor]="belowMenu" *ngIf="isLogged">
+              <mat-icon>person</mat-icon>
+            </button>
+            <mat-menu #belowMenu="matMenu" yPosition="below" class="customize">
+              <button mat-menu-item (click)="selectButton('profile')">Perfil</button>
+              <button mat-menu-item (click)="logout()">Sair</button>
+            </mat-menu>
+
+          <div class="col-2 nav-item" *ngIf="!isLogged">
+              <button mat-icon-button (click)="selectButton('login')" >
+                <a >Entrar</a>
+              </button>
+            </div>
+
+
+          </ul>
         </div>
 
       </div>

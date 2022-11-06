@@ -47,4 +47,7 @@ Repositório Front-end TCC
 03 Nov - Criando Tela de perfil do consumidor, trazendo os dados do back-end e espondo na tela <br />
 03 Nov - Arrumando botão de perfil, caso esteja logado é um dropdown com perfil e logout, caso n esteja o botão é de entrar. <br />
 03 Nov - Logout funcional. <br />
+04 Nov - Fazendo tela de registre-se. <br />
+05 Nov - Criando validadores e mascaras para tela de registre-se. <br />
+
 

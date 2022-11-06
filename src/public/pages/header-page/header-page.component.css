@@ -26,3 +26,7 @@ a:active {
   background-color: transparent;
   text-decoration: underline;
 }
+
+::ng-deep .customize {
+  background: #f8c0f5;
+}

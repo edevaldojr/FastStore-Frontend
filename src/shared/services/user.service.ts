@@ -13,4 +13,15 @@ export class UserService {
   findByEmail(email: string) : Observable<ConsumerDTO> {
     return this.http.post<ConsumerDTO>(`${API_CONFIG.baseUrl}/consumers/getConsumerByEmail`, email);
   }
+
+  registerConsumer(consumer: ConsumerDTO) {
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/registration/registerConsumer`,
+      consumer,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
 }

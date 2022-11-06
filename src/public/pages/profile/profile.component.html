@@ -7,13 +7,13 @@
         <div class="row m-l-0 m-r-0">
             <div class="col-md-4 bg-c-lite-green user-profile">
                 <div class="card-block text-center text-white">
-                    <div class="m-b-25" *ngIf="sexType == 1">
+                    <div class="m-b-25" *ngIf="sexType == 0">
                         <img src="assets/imgs/userMale.png" class="img-radius" height="100" alt="User-Profile-Image">
                     </div>
-                    <div class="m-b-25" *ngIf="sexType == 2">
+                    <div class="m-b-25" *ngIf="sexType == 1">
                       <img src="assets/imgs/userFemale.png" class="img-radius" height="100" alt="User-Profile-Image">
                     </div>
-                    <div class="m-b-25" *ngIf="sexType == 3">
+                    <div class="m-b-25" *ngIf="sexType == 2">
                       <img src="assets/imgs/userMale.png" class="img-radius" height="100" alt="User-Profile-Image">
                     </div>
                     <h6 class="f-w-600">{{consumer.firstName}} {{consumer.lastName}}</h6>
