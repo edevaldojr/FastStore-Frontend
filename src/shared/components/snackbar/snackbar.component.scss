@@ -1,0 +1,17 @@
+
+.snack-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .mat-icon {
+    color: white;
+    margin-right: 8px;
+  }
+
+  .close-alert {
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+  }
+}

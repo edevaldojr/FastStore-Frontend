@@ -1,9 +1,10 @@
+import { ProductDTO } from './../../../shared/models/product.dto';
+import { CartService } from 'src/shared/services/cart.service';
 import { Stock } from './../../../shared/models/stock';
 import { Product } from './../../../shared/models/product';
 import { ProductService } from './../../../shared/services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
@@ -13,11 +14,13 @@ import { FormControl } from '@angular/forms';
 export class ProductDetailsComponent implements OnInit {
 
   product: Product;
+  productDto: ProductDTO;
   stock: Stock;
   stockId: number;
   constructor( private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private cartService: CartService) {
 
   }
 
@@ -25,7 +28,6 @@ export class ProductDetailsComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
 
     if (!!id) {
-     console.log(id);
      this.getProduct(id);
     }
   }
@@ -39,7 +41,6 @@ export class ProductDetailsComponent implements OnInit {
 
   onChangeStock(stock: Stock){
     this.stock = stock;
-    console.log(stock)
   }
 
   alterRoute(id: number){
@@ -47,5 +48,8 @@ export class ProductDetailsComponent implements OnInit {
     setTimeout(() => { this.ngOnInit(); }, 2);
   }
 
-
+  addToCart() {
+    this.productDto = ProductDTO.toDto(this.product, this.stock)
+    this.cartService.addProduto(this.productDto);
+  }
 }

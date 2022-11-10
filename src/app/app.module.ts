@@ -1,3 +1,5 @@
+import { CartService } from 'src/shared/services/cart.service';
+import { AuthInterceptorProvider } from './../shared/interceptors/auth-interceptor';
 import { OrderService } from './../shared/services/order.service';
 import { UserService } from './../shared/services/user.service';
 import { StorageService } from './../shared/services/storage.service';
@@ -11,21 +13,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from '../public/pages/home/home.component';
 import { ProductsComponent } from '../public/pages/products/products.component';
 import { CartComponent } from '../public/pages/cart/cart.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { FooterPageComponent } from '../public/pages/footer-page/footer-page.component';
 import { HeaderPageComponent } from '../public/pages/header-page/header-page.component';
 import { ProductDetailsComponent } from '../public/pages/product-details/product-details.component';
 import { SigninComponent } from '../public/pages/signin/signin.component';
 import { SignupComponent } from '../public/pages/signup/signup.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -40,6 +42,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaskService } from 'src/shared/masks/mask.service';
 import { TextMaskModule } from 'angular2-text-mask';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackbarComponent } from 'src/shared/components/snackbar/snackbar.component';
+import { SnackbarService } from 'src/shared/components/snackbar/snackbar.service';
 
 
 registerLocaleData(localePt);
@@ -55,7 +60,8 @@ registerLocaleData(localePt);
     ProductDetailsComponent,
     SigninComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +85,8 @@ registerLocaleData(localePt);
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    TextMaskModule
+    TextMaskModule,
+    MatSnackBarModule,
   ],
   providers: [
     ProductService,
@@ -96,7 +103,10 @@ registerLocaleData(localePt);
     OrderService,
     MaskService,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SnackbarService,
+    CartService,
+    AuthInterceptorProvider,
   ],
   bootstrap: [AppComponent]
 })

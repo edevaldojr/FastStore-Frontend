@@ -1,3 +1,4 @@
+import { CartComponent } from './../public/pages/cart/cart.component';
 import { ProfileComponent } from './../public/pages/profile/profile.component';
 import { ProductDetailsComponent } from './../public/pages/product-details/product-details.component';
 import { ProductsComponent } from '../public/pages/products/products.component';
@@ -12,6 +13,7 @@ const APP_ROUTES: Routes = [
   { path: 'login', component: SigninComponent},
   { path: 'register', component: SignupComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'cart', component: CartComponent},
   { path: 'products/:id', component: ProductsComponent},
   { path: 'product-detail/:id', component: ProductDetailsComponent},
 ];

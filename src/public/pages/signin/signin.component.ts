@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'src/shared/components/snackbar/snackbar.service';
 import { CredentialDTO } from 'src/shared/models/credentials.dto';
 import { AuthService } from 'src/shared/services/auth.service';
 
@@ -23,8 +24,10 @@ export class SigninComponent {
     password: ""
   };
 
+  errorMessage: string;
+
   constructor( public auth: AuthService,
-    private router: Router) { }
+    private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
 
@@ -43,13 +46,19 @@ export class SigninComponent {
       this.auth.authenticated(this.creds)
       .subscribe(response => {
         this.credetialError = false;
-        ;
         this.auth.successfulLogin(response.headers.get('Authorization') as string);
         location.href = "";
       },
       error =>{
+        this.errorMessage = JSON.parse(error.error).message;
+        this.snackbarService.error(this.errorMessage);
         this.credetialError = true;
       });
   }
+
+  selectButton(page: string){
+    location.href = page;
+  }
+
 
 }

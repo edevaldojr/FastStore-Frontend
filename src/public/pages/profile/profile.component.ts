@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit {
     if(localUser && localUser.email) {
       this.userService.findByEmail(localUser.email)
       .subscribe(response => {
-        console.log(response);
         this.consumer = response as ConsumerDTO;
         this.checkSexType();
         this.findOrders();
@@ -59,12 +58,9 @@ export class ProfileComponent implements OnInit {
   }
 
   checkSexType(){
-    console.log(this.consumer.sexo.toString())
-    console.log(SexType.FEMININO)
     if(this.consumer.sexo === SexType.MASCULINO){
       this.sexType = 0;
     } else if(this.consumer.sexo === SexType.FEMININO){
-      console.log("sss")
       this.sexType = 1;
     } else {
       this.sexType = 2;

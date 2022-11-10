@@ -18,13 +18,11 @@ a:visited {
 a:hover {
   color: rgb(204, 0, 255);
   background-color: transparent;
-  text-decoration: underline;
 }
 
 a:active {
   color: rgb(210, 112, 235);
   background-color: transparent;
-  text-decoration: underline;
 }
 
 ::ng-deep .customize {

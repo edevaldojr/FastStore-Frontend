@@ -1,8 +1,9 @@
+import { ProductDTO } from './product.dto';
 import { Stock } from './stock';
 import { Category } from "./category";
 import { Image } from './image';
 
-export interface Product {
+export class Product {
   id: number;
   sku: string;
   name:string;

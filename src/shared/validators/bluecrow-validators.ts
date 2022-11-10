@@ -1,4 +1,4 @@
-import { AbstractControl, Validators } from "@angular/forms";
+import { AbstractControl, ValidatorFn, Validators } from "@angular/forms";
 
 export class BlueCrowValidators {
 
@@ -85,4 +85,36 @@ export class BlueCrowValidators {
     return { birthDateNotValid: true };
   }
 
+  static isValidPassword(control: AbstractControl): Validators {
+    if (control.value) {
+      const isValid = new RegExp(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+      ).test(control.value);
+      if (!isValid) {
+        return { passwordNotValid: true };
+      }
+    }
+    return false;
+  }
+
+
+  static match(controlName: string, checkControlName: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const control = controls.get(controlName);
+      const checkControl = controls.get(checkControlName);
+
+      if (checkControl?.errors && !checkControl.errors['matching']) {
+        return null;
+      }
+
+      if (control?.value !== checkControl?.value) {
+        controls.get(checkControlName)?.setErrors({ matching: true });
+        return { matching: true };
+      } else {
+        return null;
+      }
+    };
+  }
+
 }
+

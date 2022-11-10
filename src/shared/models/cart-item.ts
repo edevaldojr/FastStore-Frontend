@@ -1,6 +1,7 @@
-import { Product } from './product';
+import { ProductDTO } from './product.dto';
+import { Stock } from './stock';
+
 export interface CartItem {
   quantity: number;
-  product: Product;
-
+  product: ProductDTO
 }

@@ -10,10 +10,10 @@
                             <div id="carouselExampleControls" class="carousel slide card img-big-wrap" data-bs-ride="carousel">
                               <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                  <img [src]="product.images.length === 0 ? 'assets/imgs/NoProductImageAvailable.png': product.images[0].urlImage " alt="Imagem do Produto" class="d-block w-100" alt="...">
+                                  <img [src]="product.images.length === 0 ? 'assets/imgs/NoProductImageAvailable.png': product.images[0].urlImage " alt="Imagem do Produto" class="d-block w-100">
                                 </div>
                                 <div class="carousel-item" *ngFor="let image of product.images">
-                                  <img [src]="product.images.length === 0 ? 'assets/imgs/NoProductImageAvailable.png': image.urlImage " alt="Imagem do Produto" class="d-block w-100" alt="...">
+                                  <img [src]="product.images.length === 0 ? 'assets/imgs/NoProductImageAvailable.png': image.urlImage " alt="Imagem do Produto" class="d-block w-100">
                                 </div>
                               </div>
                               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -41,7 +41,7 @@
                              <div>
                               <mat-form-field appearance="fill">
                                 <mat-label>Escolha um estoque</mat-label>
-                                <mat-select [ngModel]="stock" [(value)]="stock" (ngModelChange)="onChangeStock($event)">
+                                <mat-select [ngModel]="stock" (ngModelChange)="onChangeStock($event)">
                                   <mat-option [value]="stock" *ngFor="let stock of product.stock"><span> Tamanho: {{stock.size}} - </span>
                                     <span>Cor: {{stock.color}}</span>
                                   </mat-option>
@@ -62,7 +62,7 @@
 
                           <div class="mb-4">
                               <a href="#" style="background-color: #f8c0f5;" class="btn mr-1">Comprar</a>
-                              <a href="#" class="btn btn-light">Adicionar ao carrinho</a>
+                              <a class="btn btn-light" (click)="addToCart()">Adicionar ao carrinho</a>
                           </div>
 
                       </article> <!-- product-info-aside .// -->

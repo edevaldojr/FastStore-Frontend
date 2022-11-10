@@ -51,24 +51,8 @@ export class ValidatorForm {
       return message;
     }
 
-    if (control.hasError('ALREADY_REGISTERED')) {
-      return `E-mail já cadastrado. Utilize um e-mail diferente.`;
-    }
-
     if (control.hasError('notMatchPassword')) {
       return 'Ambas as senhas devem ser iguais';
-    }
-
-    if(control.hasError('creditCardNumberNotValid')) {
-      return 'Número do cartão inválido';
-    }
-
-    if(control.hasError('ccvNumberNotValid')) {
-      return 'Número inválido';
-    }
-
-    if(control.hasError('dateCardNotValid')) {
-      return 'Data inválida';
     }
 
 

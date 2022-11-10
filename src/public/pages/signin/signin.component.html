@@ -19,7 +19,7 @@
                                   <input id="inputPassword" type="password" formControlName="password" placeholder="Senha" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
                               </div>
                               <div *ngIf="credetialError" >
-                                <p class="text-danger mb-4 ">Email ou senha inválida</p>
+                                <p class="text-danger mb-4 ">{{errorMessage}}</p>
                               </div>
 
                               <!-- <div class="custom-control custom-checkbox mb-3">
@@ -28,7 +28,7 @@
                               </div> -->
                               <p class="text-muted mb-4">Não tem uma conta ainda? Registre-se.</p>
                               <button type="submit" class="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm"  style="background-color: #f8c0f5;" >Entrar</button>
-                              <button type="submit" class="btn btn- btn-block text-uppercase mb-2 rounded-pill shadow-sm"  style="background-color: #82F4DC;">Registrar</button>
+                              <button type="button" class="btn btn- btn-block text-uppercase mb-2 rounded-pill shadow-sm" (click)="selectButton('register')" style="background-color: #82F4DC;">Registrar</button>
                           </form>
                       </div>
                   </div>

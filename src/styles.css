@@ -1,4 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-html, body { height: 100%; }
+html, body { height: 100% }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.success {
+  background: #198754;
+  color: white;
+}
+.warning {
+  background-color: #ffc107;
+  color: white;
+  border: none;
+}
+.error {
+  background: #dc3545;
+  color: white;
+}
+.info {
+  background-color: #0dcaf0;
+  color: white !important;
+  border: none;
+}

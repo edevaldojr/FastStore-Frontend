@@ -49,5 +49,8 @@ Repositório Front-end TCC
 03 Nov - Logout funcional. <br />
 04 Nov - Fazendo tela de registre-se. <br />
 05 Nov - Criando validadores e mascaras para tela de registre-se. <br />
-
+08 Nov - Criando interceptadores de requisição para incluir token de usuário, criando componente snack bar com 4 tipos de avisos(success, warning, error, info) <br />
+08 Nov - incluindo refresh token ao inicializar o home.ts. <br />
+09 Nov - Criando lógica do carrinho de compras (no localStorage) e tela de carrinho de compras, <br />
+10 Nov - fazendo validador de confimação de password e concluindo cadastramento de consumidor<br />
 
