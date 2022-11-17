@@ -53,4 +53,8 @@ Repositório Front-end TCC
 08 Nov - incluindo refresh token ao inicializar o home.ts. <br />
 09 Nov - Criando lógica do carrinho de compras (no localStorage) e tela de carrinho de compras, <br />
 10 Nov - fazendo validador de confimação de password e concluindo cadastramento de consumidor<br />
+12 Nov - Criando um alterar senha, com dialog verificador de senha e validadores.<br />
+13 Nov - Customizando e fazendo a tela de carrinho de compras funcional.<br />
+15 Nov - Criando AddressService para buscar endereço pela API do ViaCep.<br />
+
 
