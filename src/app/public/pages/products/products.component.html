@@ -1,0 +1,40 @@
+<br><br><br><br>
+  <div class="row px-xl-5">
+      <div class="col-lg-2 border d-none d-lg-block box">
+          <a class="btn-categoria shadow-none d-flex align-items-center justify-content-between text-white w-100 categories mt-5 myClickableThingy" (click)="getProducts()" data-toggle="collapse" style="height: 65px; padding: 0 30px;">
+              <h6 class="m-0">Categorias</h6>
+          </a>
+          <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border-top-0 border-bottom-0" id="navbar-vertical">
+            <div class="navbar-nav w-100 overflow-hidden">
+              <a class="nav-item nav-link myClickableThingy box"  [routerLinkActive]="['active']" href="/products/0" [routerLink]="['products/0']" (click)="getProducts()">Todos os produtos</a>
+            </div>
+              <div class="navbar-nav w-100 overflow-hidden" *ngFor="let category of categories">
+                  <a class="nav-item nav-link myClickableThingy box" routerLinkActive="active" (click)="alterRoute(category.id)">{{category.name}}</a>
+              </div>
+          </nav>
+      </div>
+       <div class="col-lg-8 border box">
+        <div class="">
+          <mat-paginator color="primary" [length]="pageControl.count" [pageIndex]="pageControl.page" [pageSizeOptions]="[1, 5 ,10, 25, 100]" [pageSize]="pageControl.pageSize" (page)="pageEvent($event)"></mat-paginator>
+        </div>
+        <div class="container px-4 px-lg-5 mt-5">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-6 row-cols-xl-4 justify-content-center">
+              <div class="col-md-6 col-sm-12 mb-5" *ngFor="let product of products">
+                  <div class="card h-80 productCard">
+                      <img class="card-img-top productImg" [src]="product.images.length === 0 ? 'assets/imgs/NoProductImageAvailable.png': product.images[0].urlImage " alt="Imagem do Produto" />
+                      <div class="card-body p-3">
+                          <div class="text-center">
+                              <h5 class="fw-bolder">{{product.name}}</h5>
+                              {{product.stock[0].unityValue | currency:'BRL'}}
+                          </div>
+                      </div>
+                      <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <a class="btn details" [routerLink]="['/product-detail/', product.id]" href="/products-detail" routerLinkActive="active">Detalhes</a><br />
+                        <a [routerLink]="['/product-detail/', product.id]" href="/products-detail" class="btn cart">Add ao carrinho</a>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

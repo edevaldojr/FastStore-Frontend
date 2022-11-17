@@ -9,3 +9,4 @@ export class AppComponent {
   title = 'Frontend-FastStore-Lopestyle';
   showFiller = false;
 }
+

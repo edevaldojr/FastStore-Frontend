@@ -20,6 +20,14 @@ export class AuthService {
     return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, { observe: 'response', responseType: 'text' });
   }
 
+  forgotPassword(email: String){
+    return this.http.post(`${API_CONFIG.baseUrl}/auth/forgot`, {email:email});
+  }
+
+  changePassword(email: string, newPassword: string){
+    return this.http.post(`${API_CONFIG.baseUrl}/auth/changePassword`, {email: email, password: newPassword}, { observe: 'response', responseType: 'text' });
+  }
+
   refreshToken(){
     return this.http.post(`${API_CONFIG.baseUrl}/auth/refreshToken`, {},
     {
@@ -35,11 +43,11 @@ export class AuthService {
       email: this.jwtHelper.decodeToken(tok).sub
     };
     this.storage.setLocalUser(user);
-    this.cartService.createOrClearCart();
   }
 
   logout() {
     this.storage.setLocalUser(null as any);
+    this.cartService.createOrClearCart();
   }
 
 }

@@ -1,0 +1,21 @@
+.btn-quantity{
+  background-color: rgba(238,196,243,1);
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #f8c0f5;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  position: absolute;
+}
+
+.btn-spin {
+  width: auto;
+  height: auto;
+  display: inline-block;
+}
