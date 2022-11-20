@@ -1,3 +1,4 @@
+import { ShippingService } from './../shared/services/shipping.service';
 import { AddressService } from './../shared/services/address.service';
 import { CartService } from 'src/shared/services/cart.service';
 import { AuthInterceptorProvider } from './../shared/interceptors/auth-interceptor';
@@ -117,7 +118,8 @@ registerLocaleData(localePt);
     CartService,
     AuthInterceptorProvider,
     HeaderPageComponent,
-    AddressService
+    AddressService,
+    ShippingService
   ],
   bootstrap: [AppComponent]
 })

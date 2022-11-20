@@ -56,5 +56,5 @@ Repositório Front-end TCC
 12 Nov - Criando um alterar senha, com dialog verificador de senha e validadores.<br />
 13 Nov - Customizando e fazendo a tela de carrinho de compras funcional.<br />
 15 Nov - Criando AddressService para buscar endereço pela API do ViaCep.<br />
-
+18 Nov - Alterando tela de carrinho de compras, integrando api do ViaCep com Api dos Correios para calcular preço e prazo das entregas do produto.<br />
 

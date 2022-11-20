@@ -1,3 +1,4 @@
+import { ShippingResponseDTO } from './../models/shipping.response.dto';
 import { LocalUser } from './../models/local_users';
 import { Injectable } from "@angular/core";
 import { Cart } from '../models/cart';
@@ -31,7 +32,7 @@ export class StorageService{
         return JSON.parse(str);
       }
       else {
-        return null as any;;
+        return null as any;
       }
     }
 
@@ -41,6 +42,25 @@ export class StorageService{
       }
       else {
         localStorage.removeItem (STORAGE_KEYS.cart);
+      }
+    }
+
+    getShippingAddress(): ShippingResponseDTO {
+      let str = localStorage.getItem(STORAGE_KEYS.address);
+      if (str != null) {
+        return JSON.parse(str);
+      }
+      else {
+        return null as any;
+      }
+    }
+
+    setShippingAddress(obj: ShippingResponseDTO) {
+      if (obj != null) {
+        localStorage.setItem(STORAGE_KEYS.address, JSON.stringify(obj));
+      }
+      else {
+        localStorage.removeItem (STORAGE_KEYS.address);
       }
     }
   }

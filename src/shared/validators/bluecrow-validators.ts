@@ -116,5 +116,17 @@ export class BlueCrowValidators {
     };
   }
 
+  static isValidCep(control: AbstractControl): Validators {
+    if (control.value) {
+      const cep = control.value.replace(/\D/g, "");
+      const isValid = new RegExp(/^[0-9]*$/)
+      .test(cep)
+      if (isValid && cep.length == 8) {
+        return false;
+      }
+    }
+    return { emailNotValid: true };
+  }
+
 }
 

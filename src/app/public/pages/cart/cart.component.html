@@ -3,18 +3,15 @@
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-8">
         <div class="card mb-4">
-          <div class="card-header py-3">
-            <h5 class="mb-0">Carrinho de compras - {{cartQuantity}} items</h5>
+          <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+            <h4 class="mb-0">Carrinho de compras - {{cartQuantity}} items</h4>
           </div>
           <div class="card-body" *ngFor="let productStock of items">
             <div class="row">
               <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
                   <img [src]="productStock.product.images.length === 0 ? 'assets/imgs/NoProductImageAvailable.png': productStock.product.images[0].urlImage " alt="Imagem do Produto"
-                    class="w-100" alt="Blue Jeans Jacket" />
-                  <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                  </a>
+                    class="w-100" alt="Imagem do produto" />
                 </div>
               </div>
 
@@ -36,8 +33,8 @@
                     </button>
                   </div>
 
-                  <div class="form-outline">
-                    <input id="form1" min="0" name="quantity" [value]="productStock.quantity" type="number" class="form-control" />
+                  <div class="form-outline text-center">
+                    <input min="0" disabled name="quantity" [value]="productStock.quantity" type="number" class="form-control text-center" />
                     <label class="form-label" for="form1">Quantidade</label>
                   </div>
                   <div>
@@ -57,34 +54,11 @@
             <hr class="my-4" />
           </div>
         </div>
-        <div class="card mb-4">
-          <div class="card-body">
-            <p><strong>Expected shipping delivery</strong></p>
-            <p class="mb-0">12.10.2020 - 14.10.2020</p>
-          </div>
-        </div>
-        <div class="card mb-4 mb-lg-0">
-          <div class="card-body">
-            <p><strong>We accept</strong></p>
-            <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-              alt="Visa" />
-            <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-              alt="American Express" />
-            <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-              alt="Mastercard" />
-            <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-              alt="PayPal acceptance mark" />
-          </div>
-        </div>
       </div>
       <div class="col-md-4">
         <div class="card mb-4">
-          <div class="card-header py-3">
-            <h5 class="mb-0">Resumo</h5>
+          <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+            <h4 class="mb-0">Resumo</h4>
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -95,7 +69,7 @@
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Entrega
-                <span>Gratis</span>
+                <span>{{shippingValue | currency:'BRL'}}</span>
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -106,77 +80,106 @@
               </li>
             </ul>
 
-            <button type="button" class="btn btn-success btn-lg btn-block">
+            <button type="button" (click)="goOn('paymentPage')" [disabled]="shippingValue == 0" class="btn btn-lg btn-block" style="background-color: #f8c0f5">
               Ir para pagamento
             </button>
           </div>
         </div>
 
         <div class="card mb-4">
-          <div class="card-header py-3">
-            <h5 class="mb-0">Entrega</h5>
+          <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+            <h4 class="mb-0">Entrega</h4>
           </div>
           <div class="card-body">
-            <ul class="list-group list-group-flush" [formGroup]="formAddress" (ngSubmit)="saveAddress()">
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <input type="text" placeholder="CEP" formControlName="cep" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <div class="btn-spin" style="margin-right: 15px;">
-                    <button type="button" class="btn btn-sm btn-block" (click)="getCep()" style="background-color: rgba(238,196,243,1); color: white;">
-                      Buscar CEP
-                    </button>
+            <ul class="list-group list-group-flush">
+              <form [formGroup]="formShipping" (ngSubmit)="calcPrecoPrazo()">
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-3">
+                  <div class="form-group text-center mb-1">
+                    <h3 class="text-center">Cep destino <mat-icon id="icon-home">location_city</mat-icon></h3>
+                    <input type="text" placeholder="CEP" [textMask]="cepMask" formControlName="cep" class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
                   </div>
-                  <div class="btn-spin spinner">
-                    <mat-spinner *ngIf="isLoading" mode="indeterminate" diameter="30"></mat-spinner>
+                </li>
+                <div class="form-group text-center mb-3">
+                  <p  class="text-danger" *ngIf="this.formShipping.get('cep')?.touched && !this.formShipping.get('cep')?.valid || !this.formShipping.get('cep')?.valid && !this.isValidCep && this.isValidCep != undefined">
+                    Campo obrigatório, deve conter um cep válido.
+                  </p>
+                </div>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-3">
+                  <div class="text-center">
+                    <h3 class="text-center">Tipo de entrega <mat-icon>local_shipping</mat-icon></h3>
+                    <mat-radio-group aria-label="Entrega" color="primary" formControlName="shippingType">
+                      <mat-radio-button [value]="'40010'">SEDEX</mat-radio-button>&nbsp;
+                      <mat-radio-button [value]="'41106'">PAC</mat-radio-button>&nbsp;
+                    </mat-radio-group>
                   </div>
+                </li>
+                <div class="form-group text-center mb-3">
+                  <p  class="text-danger" *ngIf="this.formShipping.get('shippingType')?.touched && !this.formShipping.get('shippingType')?.valid || !this.formShipping.get('shippingType')?.valid && !this.isValidCep && this.isValidCep != undefined">
+                    Campo obrigatório.
+                  </p>
+                  <p  class="text-danger" *ngIf="errorPrecoPrazo">
+                    {{errorMessage}}
+                  </p>
                 </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <input type="text" placeholder="Número" formControlName="number" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <input type="text" placeholder="Complemento" formControlName="complemento" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <input type="text" placeholder="Rua" formControlName="logradouro" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <input type="text" placeholder="Bairro" formControlName="bairro" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1">
-                  <input type="text" placeholder="Cidade" formControlName="localidade" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
-                <div class="form-group mb-1 justify-content-center">
-                  <input type="text" placeholder="UF" formControlName="uf" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
-                </div>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                <div>
-                  <strong>Frete total</strong>
-                </div>
-                <span><strong>{{shippingValue | currency:'BRL'}}</strong></span>
-              </li>
-            </ul>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-4">
+                  <div class="form-group mb-1">
+                    <div class="btn-spin" style="margin-right: 15px;">
+                      <button type="submit" class="btn btn-sm btn-block" style="background-color: rgba(238,196,243,1);">
+                        Calcular valor
+                      </button>
+                    </div>
+                    <div class="btn-spin spinner">
+                      <mat-spinner *ngIf="isLoading" mode="indeterminate" diameter="30"></mat-spinner>
+                    </div>
+                  </div>
+                </li>
 
-            <button type="button" class="btn btn-success btn-lg btn-block">
-              Salvar Endereço
-            </button>
+                <!-- <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
+                  <div class="form-group mb-1">
+                    <input type="text" placeholder="Cidade" formControlName="localidade" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
+                  <div class="form-group mb-1 justify-content-center">
+                    <input type="text" placeholder="UF" formControlName="uf" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
+                  <div class="form-group mb-1">
+                    <input type="text" placeholder="Rua" formControlName="logradouro" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
+                  <div class="form-group mb-1">
+                    <input type="text" placeholder="Bairro" formControlName="bairro" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
+                  <div class="form-group mb-1">
+                    <input type="text" placeholder="Número" formControlName="number" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-1">
+                  <div class="form-group mb-1">
+                    <input type="text" placeholder="Complemento" formControlName="complemento" class="form-control rounded-pill border-0 shadow-sm px-4 text-black">
+                  </div>
+                </li> -->
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-2">
+                  <div>
+                    <strong>Frete total</strong>
+                  </div>
+                  <span><strong>{{shippingValue | currency:'BRL'}}</strong></span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-2">
+                  <div>
+                    <strong>Prazo de entrega</strong>
+                  </div>
+                  <span><strong>{{shippingResponseDTO.prazoEntrega}} dias úteis.</strong></span>
+                </li>
+              </form>
+            </ul>
           </div>
         </div>
       </div>
