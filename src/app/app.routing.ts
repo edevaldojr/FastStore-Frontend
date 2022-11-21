@@ -1,3 +1,4 @@
+import { PaymentPageComponent } from './public/pages/payment-page/payment-page.component';
 import { CartComponent } from './public/pages/cart/cart.component';
 import { ProfileComponent } from './public/pages/profile/profile.component';
 import { ProductDetailsComponent } from './public/pages/product-details/product-details.component';
@@ -18,6 +19,8 @@ const APP_ROUTES: Routes = [
   { path: 'cart', component: CartComponent},
   { path: 'products/:id', component: ProductsComponent},
   { path: 'product-detail/:id', component: ProductDetailsComponent},
+  { path: 'paymentPage', component: PaymentPageComponent},
+
 ];
 
 export const routing: ModuleWithProviders<RouterModule> = RouterModule.forRoot(APP_ROUTES);

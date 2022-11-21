@@ -1,0 +1,316 @@
+<div class="container py-5">
+  <div class="row d-flex justify-content-center my-4">
+    <div class="col-md-8">
+
+      <div class="card mb-4">
+        <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+          <h4 class="mb-0">Pagamento</h4>
+        </div>
+        <div class="card-body">
+          <h3 class="mb-3">Escolha seu método de pagamento.</h3>
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Cartão de crédito
+                </mat-panel-title>
+                <mat-panel-description>
+                  <img class="icon-img" src="/assets/imgs/master-icon.png" alt="icon-img">
+                  <img class="icon-img" src="/assets/imgs/elo-icon.png" alt="icon-img">
+                  <img class="icon-img" src="/assets/imgs/visa-icon.png" alt="icon-img">
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="div-credit-card text-center mt-3">
+                <div class="container">
+                  <div class="row justify-content-center">
+                      <div class="col-xs-12 col-md-6 col-md-offset-4">
+                          <div class="panel panel-default">
+                              <div class="panel-heading">
+                                  <div class="row">
+                                      <h3 class="text-center">Detalhes do Pagamento</h3>
+                                      <img class="img-responsive cc-img mb-2" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                                  </div>
+                              </div>
+                              <div class="panel-body">
+                                  <form role="form" [formGroup]="formCard" (ngSubmit)="savePayment('paymentWithCreditCard')">
+                                      <div class="row">
+                                          <div class="col-xs-12 mb-2">
+                                              <div class="form-group">
+                                                  <label>NÚMERO DO CARTÃO</label>
+                                                  <div class="input-group fa-lg" style="display: flex; align-items: center">
+                                                      <input type="text" class="form-control" formControlName="cardNumber" [textMask]="cardNumberMask" placeholder="Número de cartão válido" />
+                                                      <span class="input-group-addon ml-2"><span class="fa fa-credit-card"></span></span>
+                                                  </div>
+                                                  <p  class="text-danger" *ngIf="this.formCard.get('cardNumber')?.touched && !this.formCard.get('cardNumber')?.valid || !this.formCard.get('cardNumber')?.valid && !this.isPaymentValid && this.isPaymentValid != undefined">
+                                                    Campo obrigatório, deve conter um número válido.
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-xs-7 col-md-7">
+                                              <div class="form-group">
+                                                  <label><span class="hidden-xs">DATA DE EXPIRAÇÃO</span></label>
+                                                  <input type="text" class="form-control" formControlName="expiryDate" [textMask]="cardExpDateMask" placeholder="MM / YY" />
+                                              </div>
+                                              <p  class="text-danger" *ngIf="this.formCard.get('expiryDate')?.touched && !this.formCard.get('expiryDate')?.valid || !this.formCard.get('expiryDate')?.valid && !this.isPaymentValid && this.isPaymentValid != undefined">
+                                                Campo obrigatório, deve conter uma data válida.
+                                              </p>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 pull-right">
+                                              <div class="form-group">
+                                                  <label>CVV</label>
+                                                  <input type="text" class="form-control" formControlName="cvv" [textMask]="cvvMask" placeholder="CVV" />
+                                              </div>
+                                              <p  class="text-danger" *ngIf="this.formCard.get('cvv')?.touched && !this.formCard.get('cvv')?.valid || !this.formCard.get('cvv')?.valid && !this.isPaymentValid && this.isPaymentValid != undefined">
+                                                Campo obrigatório, deve conter um cvv válido.
+                                              </p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-xs-12">
+                                              <div class="form-group">
+                                                  <label>TITULAR DO CARTÃO</label>
+                                                  <input type="text" class="form-control" formControlName="ownerName" placeholder="Nome do titular do cartão" />
+                                              </div>
+                                              <p  class="text-danger" *ngIf="this.formCard.get('ownerName')?.touched && !this.formCard.get('ownerName')?.valid || !this.formCard.get('ownerName')?.valid && !this.isPaymentValid && this.isPaymentValid != undefined">
+                                                Campo obrigatório.
+                                              </p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>QNT. PARCELAS</label>
+                                                <select class="form-select" formControlName="numeroDeParcelas">
+                                                  <option *ngFor="let parcela of parcelas" [value]="parcela">{{parcela}}</option>
+                                                </select>
+                                            </div>
+                                            <p  class="text-danger" *ngIf="this.formCard.get('numeroDeParcelas')?.touched && !this.formCard.get('numeroDeParcelas')?.valid || !this.formCard.get('numeroDeParcelas')?.valid && !this.isPaymentValid && this.isPaymentValid != undefined">
+                                              Campo obrigatório.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                      <div class="row">
+                                          <div class="col-xs-12">
+                                              <button class="btn btn-lg btn-block" style="background-color: rgba(130,244,220,1);" type="submit">Processar Pagamento</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </form>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Boleto bancário
+                </mat-panel-title>
+                <mat-panel-description>
+                  <img class="icon-img" src="/assets/imgs/boleto-icon.png" alt="icon-img">
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+                <div class="panel-footer mt-3">
+                  Valor a ser pago: <strong>{{totalValue | currency:'BRL'}}</strong>
+                  <div class="row mt-3">
+                      <div class="col-xs-12">
+                          <button class="btn btn-lg btn-block" style="background-color: rgba(130,244,220,1);" (click)="savePayment('paymentWithBoleto')">Processar Pagamento</button>
+                      </div>
+                  </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Pix
+                </mat-panel-title>
+                <mat-panel-description>
+                  <img class="icon-img" src="/assets/imgs/pix-icon.png" alt="icon-img">
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="text-center mt-3"><p>Método de pagamento indisponível</p></div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+          <h4 class="mb-0">Endereço de entrega</h4>
+        </div>
+        <div class="card-body">
+
+          <ul class="list-group list-group-flush">
+            <form [formGroup]="formAddress" (ngSubmit)="saveAddress()">
+              <div class="row">
+                <div class="col-6">
+                  <li class="list-group-item d-flex justify-content-end align-items-center border-0 px-0 pb-0 mb-1">
+                    <div class="form-group text-center mb-1">
+                      <input type="text" placeholder="CEP" formControlName="cep" [textMask]="cepMask" (change)="getCep()" class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                    <p  class="text-danger" *ngIf="this.formAddress.get('cep')?.touched && !this.formAddress.get('cep')?.valid">
+                      Campo obrigatório, deve conter um cep válido.
+                    </p>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-end align-items-center border-0 px-0 pb-0 mb-1">
+                    <div class="form-group mb-1">
+                      <input type="text" placeholder="Cidade" formControlName="localidade" readonly class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-end align-items-center border-0 px-0 pb-0 mb-1">
+                    <div class="form-group mb-1 justify-content-center">
+                      <input type="text" placeholder="UF" formControlName="uf" readonly class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-end align-items-center border-0 px-0 pb-0 mb-1">
+                    <div class="form-group mb-1">
+                      <input type="text" placeholder="Bairro" formControlName="bairro" class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                    <p  class="text-danger" *ngIf="this.formAddress.get('localidade')?.touched && !this.formAddress.get('localidade')?.valid">
+                      Campo obrigatório.
+                    </p>
+                  </li>
+                </div>
+                <div class="col-6">
+                  <li class="list-group-item d-flex border-0 px-0 pb-0 mb-1">
+                    <div class="form-group mb-1">
+                      <input type="text" placeholder="Rua" formControlName="logradouro" class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                    <p  class="text-danger" *ngIf="this.formAddress.get('logradouro')?.touched && !this.formAddress.get('logradouro')?.valid">
+                      Campo obrigatório.
+                    </p>
+                  </li>
+                  <li class="list-group-item d-flex border-0 px-0 pb-0 mb-1">
+                    <div class="form-group mb-1">
+                      <input type="text" placeholder="Número" formControlName="numero" class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                    <p  class="text-danger" *ngIf="this.formAddress.get('numero')?.touched && !this.formAddress.get('numero')?.valid">
+                      Campo obrigatório.
+                    </p>
+                  </li>
+                  <li class="list-group-item d-flex border-0 px-0 pb-0 mb-1">
+                    <div class="form-group mb-1">
+                      <input type="text" placeholder="Complemento" formControlName="complemento" class="form-control rounded-pill border-2 shadow-sm px-4 text-black">
+                    </div>
+                  </li>
+                  </div>
+                </div>
+                <div class="div-btn-address">
+                  <button type="submit" class="btn btn-address btn-lg mt-3 btn-block" [disabled]="!formAddress.valid"  style="background-color: #f8c0f5">
+                    Confirmar endereço
+                  </button>
+                </div>
+            </form>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+          <h4 class="mb-0">Items do pedido</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6 mb-2" *ngFor="let productStock of items">
+              <div class=" mb-1 mb-lg-0">
+                <h4><strong>Nome: {{productStock.product.name}}</strong></h4>
+                <h4>Cor: {{productStock.product.stock.color}}</h4>
+                <h4>Tamanho: {{productStock.product.stock.size}}</h4>
+                <h4>Quantidade: {{productStock.quantity}}</h4>
+                <h4>
+                  Valor unitário: <strong>{{productStock.product.stock.unityValue | currency:'BRL'}}</strong>
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+          <h4 class="mb-0">Entrega</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formShipping" (ngSubmit)="calcPrecoPrazo()">
+            <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-3">
+              <div class="text-center">
+                <h3 class="text-center">Tipo de entrega <mat-icon>local_shipping</mat-icon></h3>
+                <mat-radio-group aria-label="Entrega" color="primary" formControlName="shippingType">
+                  <mat-radio-button [checked]="shippingResponseDTO.codigo == 40010" [value]="'40010'">SEDEX</mat-radio-button>&nbsp;
+                  <mat-radio-button [checked]="shippingResponseDTO.codigo == 41106" [value]="'41106'">PAC</mat-radio-button>&nbsp;
+                </mat-radio-group>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0 mb-4">
+              <div class="form-group mb-1">
+                <div class="btn-spin" style="margin-right: 15px;">
+                  <button type="submit" class="btn btn-sm btn-block" style="background-color: rgba(238,196,243,1);">
+                    Calcular valor
+                  </button>
+                </div>
+              </div>
+            </li>
+          </form>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-2">
+            <div>
+              <strong>Frete total {{shippingValue | currency:'BRL'}}</strong>
+            </div>
+            <span><strong></strong></span>
+          </li>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-2">
+            <div>
+              <strong>Prazo de entrega</strong>
+            </div>
+            <span><strong>{{shippingResponseDTO.prazoEntrega}} dias úteis.</strong></span>
+          </li>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header py-3" style="background-color: rgba(130,244,220,1);">
+          <h4 class="mb-0">Resumo do pedido</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              Produtos
+              <span>{{totalProductsValue | currency:'BRL'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              Entrega
+              <span>{{shippingValue | currency:'BRL'}}</span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+              <div>
+                <strong>Valor total</strong>
+              </div>
+              <span><strong>{{totalValue | currency:'BRL'}}</strong></span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn-lg btn-block" (click)="finalizedPayment()" [disabled]="!formAddress.valid || !isPaymentValid" style="background-color: #f8c0f5">
+            Finalizar pagamento
+          </button>
+          <div class="btn-spin spinner">
+            <mat-spinner *ngIf="isLoading" mode="indeterminate" diameter="30"></mat-spinner>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

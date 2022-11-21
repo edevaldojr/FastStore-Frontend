@@ -28,7 +28,6 @@ export class CartComponent implements OnInit {
   errorPrecoPrazo: boolean = false;
   cepMask = { mask: Masks.cepMask, guide: true };
   isValidCep: boolean = true;
-  // formAddress: FormGroup;
   formShipping: FormGroup;
   isLoading: boolean = false;
   shippingDTO = new ShippingRequestDTO;
@@ -37,22 +36,14 @@ export class CartComponent implements OnInit {
     valor: "0",
     prazoEntrega: 0,
     erro: 0,
-    msgErro: ""
+    msgErro: "",
+    cepDestino: ""
   };
 
   constructor(private cartService: CartService,
               private shippingService: ShippingService,
               private formBuilder: FormBuilder,
               private storageService: StorageService) {
-    // this.formAddress = this.formBuilder.group({
-    //   cep: ['', [Validators.required]],
-    //   complemento: ['', [Validators.required]],
-    //   number: ['', [Validators.required]],
-    //   logradouro: ['', [Validators.required]],
-    //   bairro: ['', [Validators.required]],
-    //   localidade: [{value: '', disabled: true}, [Validators.required]],
-    //   uf: [{value: '', disabled: true}, [Validators.required]]
-    // });
     this.formShipping = this.formBuilder.group({
       cep: ['', [Validators.required, BlueCrowValidators.isValidCep]],
       shippingType: ['', [Validators.required]]
@@ -69,14 +60,13 @@ export class CartComponent implements OnInit {
     this.totalProductsValue = this.cartService.total();
     this.totalQuantityItems = this.cartService.totalQuantity();
 
-    if(this.storageService.getShippingAddress() != null && this.storageService.getShippingAddress() != undefined){
-      this.shippingResponseDTO = this.storageService.getShippingAddress();
-      console.log("passou aqui")
+    if(this.storageService.getShippingPrecoPrazo() != null && this.storageService.getShippingPrecoPrazo() != undefined){
+      this.shippingResponseDTO = this.storageService.getShippingPrecoPrazo();
       this.shippingValue = parseFloat(this.shippingResponseDTO.valor.replace(',','.'));
     } else {
       this.shippingValue = 0;
     }
-
+    this.formShipping.controls['cep'].setValue(this.shippingResponseDTO.cepDestino);
     this.totalAmount();
   }
 
@@ -124,7 +114,8 @@ export class CartComponent implements OnInit {
           this.errorMessage = response.msgErro;
         } else {
           this.shippingResponseDTO = response;
-          this.storageService.setShippingAddress(this.shippingResponseDTO);
+          this.shippingResponseDTO.cepDestino = this.shippingDTO.s_cep_destino;
+          this.storageService.setShippingPrecoPrazo(this.shippingResponseDTO);
           this.errorPrecoPrazo = false;
           this.ngOnInit();
         }
@@ -151,25 +142,4 @@ export class CartComponent implements OnInit {
     this.shippingDTO.n_vl_largura = largura;
   }
 
-  // getCep(){
-  //   this.isLoading = true;
-  //   this.addressService.getCep(this.formAddress.controls['cep'].value).subscribe(response =>{
-  //     this.viaCep = response;
-  //     this.povoaAddress(this.viaCep);
-  //     this.isLoading = false;
-  //   }, error=>{
-  //     this.isLoading = false;
-  //   });
-  // }
-
-  // saveAddress(){
-
-  // }
-
-  // povoaAddress(viaCep: ViaCep){
-  //   this.formAddress.controls['logradouro'].setValue(viaCep.logradouro);
-  //   this.formAddress.controls['bairro'].setValue(viaCep.bairro);
-  //   this.formAddress.controls['localidade'].setValue(viaCep.localidade);
-  //   this.formAddress.controls['uf'].setValue(viaCep.uf);
-  // }
 }

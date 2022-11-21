@@ -51,7 +51,8 @@ import { ForgotPasswordComponent } from './public/pages/forgot-password/forgot-p
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChangePasswordComponent } from './public/pages/header-page/change-password/change-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { PaymentPageComponent } from './public/pages/payment-page/payment-page.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 registerLocaleData(localePt);
 
@@ -70,6 +71,7 @@ registerLocaleData(localePt);
     SnackbarComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
+    PaymentPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +98,8 @@ registerLocaleData(localePt);
     TextMaskModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
   ],
   providers: [
     ProductService,

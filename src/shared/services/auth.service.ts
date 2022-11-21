@@ -48,6 +48,8 @@ export class AuthService {
   logout() {
     this.storage.setLocalUser(null as any);
     this.cartService.createOrClearCart();
+    this.storage.setShippingPrecoPrazo(null as any);
+    this.storage.setAddress(null as any);
   }
 
 }

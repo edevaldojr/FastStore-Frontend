@@ -57,4 +57,6 @@ Repositório Front-end TCC
 13 Nov - Customizando e fazendo a tela de carrinho de compras funcional.<br />
 15 Nov - Criando AddressService para buscar endereço pela API do ViaCep.<br />
 18 Nov - Alterando tela de carrinho de compras, integrando api do ViaCep com Api dos Correios para calcular preço e prazo das entregas do produto.<br />
-
+19 Nov - Criando página de pagamentos, organizando e estilizando a página, incluindo url de imagem em categoria.<br />
+20 Nov - Deixando página funcional, verificando endereço, verificando método de pagamento, listando pedidos e verificando valor da entrega.<br />
+20 Nov - Criando mais 2 localStorages "shippingPrecoPrazo","orderAddress" fazendo validações da página de pagamento.<br />

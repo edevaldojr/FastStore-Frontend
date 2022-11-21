@@ -44,8 +44,6 @@ export class ProfileComponent implements OnInit {
       error => {
 
       })
-    }else{
-
     }
   }
 

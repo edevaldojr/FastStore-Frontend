@@ -4,4 +4,5 @@ export class ShippingResponseDTO {
   prazoEntrega: number;
   erro: number;
   msgErro: string;
+  cepDestino: string;
 }

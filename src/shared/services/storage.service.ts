@@ -1,3 +1,4 @@
+import { Address } from './../models/address';
 import { ShippingResponseDTO } from './../models/shipping.response.dto';
 import { LocalUser } from './../models/local_users';
 import { Injectable } from "@angular/core";
@@ -45,7 +46,26 @@ export class StorageService{
       }
     }
 
-    getShippingAddress(): ShippingResponseDTO {
+    getShippingPrecoPrazo(): ShippingResponseDTO {
+      let str = localStorage.getItem(STORAGE_KEYS.precoPrazo);
+      if (str != null) {
+        return JSON.parse(str);
+      }
+      else {
+        return null as any;
+      }
+    }
+
+    setShippingPrecoPrazo(obj: ShippingResponseDTO) {
+      if (obj != null) {
+        localStorage.setItem(STORAGE_KEYS.precoPrazo, JSON.stringify(obj));
+      }
+      else {
+        localStorage.removeItem (STORAGE_KEYS.precoPrazo);
+      }
+    }
+
+    getAddress(): Address {
       let str = localStorage.getItem(STORAGE_KEYS.address);
       if (str != null) {
         return JSON.parse(str);
@@ -55,7 +75,7 @@ export class StorageService{
       }
     }
 
-    setShippingAddress(obj: ShippingResponseDTO) {
+    setAddress(obj: Address) {
       if (obj != null) {
         localStorage.setItem(STORAGE_KEYS.address, JSON.stringify(obj));
       }

@@ -1,0 +1,91 @@
+.btn-quantity{
+  background-color: rgba(238,196,243,1);
+}
+
+.div-btn-address{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-address{
+  width: 225px;
+  height: 45px;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #f8c0f5;
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+mat-expansion-panel-header{
+  background-color: #f8c0f5!important;
+}
+
+mat-expansion-panel-header:hover{
+  background-color: rgb(226, 173, 224)!important;
+}
+
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  position: absolute;
+}
+
+.btn-spin {
+  width: auto;
+  height: auto;
+  display: inline-block;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+h4 {
+  margin-bottom: 0em;
+}
+
+.icon-img{
+  width: 40px;
+  height: 30px;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content:end;
+  align-items: flex-end;
+}
+
+.cc-img {
+  margin: 0 auto;
+}
+
+input[type=number] {
+  appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  position: absolute;
+}
+
+.btn-spin {
+  width: auto;
+  height: auto;
+  display: inline-block;
+}
