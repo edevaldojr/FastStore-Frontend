@@ -1,4 +1,4 @@
-export interface Stock {
+export class Stock {
   id:number;
   quantity:number;
   color:string

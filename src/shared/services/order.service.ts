@@ -1,3 +1,4 @@
+import { OrderDTO } from 'src/shared/models/order.dto';
 import { PageControl } from './../models/pageControl';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -11,5 +12,9 @@ export class OrderService {
 
   findOrdersByConsumer(consumerId: number, pageControl: PageControl) {
     return this.http.post(`${API_CONFIG.baseUrl}/orders/order/`+ consumerId, pageControl);
+  }
+
+  insertOrders(order: OrderDTO) {
+    return this.http.post(`${API_CONFIG.baseUrl}/orders/order`, order);
   }
 }

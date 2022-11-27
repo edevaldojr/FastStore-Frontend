@@ -1,3 +1,6 @@
+import { DialogSuccessPaymentComponent } from './dialog-success-payment/dialog-success-payment.component';
+import { RefDTO } from './../../../../shared/models/ref.dto';
+import { OrderService } from './../../../../shared/services/order.service';
 import { ConsumerDTO } from './../../../../shared/models/consumer.dto';
 import { UserService } from './../../../../shared/services/user.service';
 import { SnackbarService } from './../../../../shared/components/snackbar/snackbar.service';
@@ -17,6 +20,10 @@ import { CartItem } from 'src/shared/models/cart-item';
 import { Order } from 'src/shared/models/order';
 import { OrderProductsDTO } from 'src/shared/models/order-products.dto';
 import { OrderDTO } from 'src/shared/models/order.dto';
+import { SexType } from 'src/shared/models/enums/SexType.enum';
+import { Product } from 'src/shared/models/product';
+import { Stock } from 'src/shared/models/stock';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-payment-page',
@@ -42,16 +49,29 @@ export class PaymentPageComponent implements OnInit {
   errorPrecoPrazo: boolean = false;
   isValidCep: boolean = true;
   items: CartItem[];
-  order: Order;
   formCard: FormGroup;
   cardNumberMask = { mask: Masks.creditCardNumberMask, guide: true };
   cardExpDateMask = { mask: Masks.creditCardDateMask, guide: true };
   cvvMask = { mask: Masks.cvvMask, guide: true };
   isPaymentValid: boolean;
-  orderProducts: OrderProductsDTO[];
-  orderProduct: OrderProductsDTO;
-  orderDTO: OrderDTO;
+  orderProducts: OrderProductsDTO[] = [];
+  isLoadingPayment: boolean = false;
+  orderProduct: OrderProductsDTO = {
+    quantity: 0,
+    discount: 0,
+    unityValue: 0,
+    product: new Product,
+    stock: new Stock,
+    subTotal: 0,
+  };
+  orderDTO: OrderDTO = {
+    consumer: new RefDTO,
+    address: new Address,
+    payment: new PaymentDTO,
+    orderProducts: new OrderProductsDTO as any
+  };
   consumer: ConsumerDTO;
+  refDto: RefDTO = new RefDTO();
   shippingResponseDTO: ShippingResponseDTO = {
     codigo: 0,
     valor: "0",
@@ -75,13 +95,17 @@ export class PaymentPageComponent implements OnInit {
     "@type": ""
   };
 
-  constructor(public formBuilder: FormBuilder,
-              private addressService: AddressService,
-              private shippingService: ShippingService,
-              private storageService: StorageService,
-              private cartService: CartService,
-              private snackbarService: SnackbarService,
-              private userService: UserService) {
+  constructor(
+    public formBuilder: FormBuilder,
+    private addressService: AddressService,
+    private shippingService: ShippingService,
+    private storageService: StorageService,
+    private cartService: CartService,
+    private snackbarService: SnackbarService,
+    private userService: UserService,
+    private orderService: OrderService,
+    private dialog: MatDialog
+  ) {
     this.formShipping = this.formBuilder.group({
       shippingType: ['', [Validators.required]]
     })
@@ -137,8 +161,6 @@ export class PaymentPageComponent implements OnInit {
       this.storageService.setAddress(this.formAddress.value);
       this.snackbarService.success('Endereço salvo com sucesso!');
     }
-
-
   }
 
   povoaAddress(viaCep: ViaCep) {
@@ -226,7 +248,7 @@ export class PaymentPageComponent implements OnInit {
     if(method == 'paymentWithBoleto') {
       this.isPaymentValid = true;
       this.orderPayment['@type'] = method;
-      this.orderPayment.numeroDeParcelas = null as any;
+      this.orderPayment.numeroDeParcelas = undefined as any;
       this.snackbarService.success('Método de pagamento válido!')
 
     } else if(method == 'paymentWithCreditCard' && this.formCard.valid){
@@ -238,18 +260,35 @@ export class PaymentPageComponent implements OnInit {
     } else{
       this.isPaymentValid = false;
     }
-    console.log(this.orderPayment)
   }
 
   finalizedPayment() {
-    this.order.payment = this.orderPayment;
-    this.order.totalValue = this.totalValue;
-    //this.order.product =
+    this.populateOrder();
+    this.isLoadingPayment = true;
+    this.orderService.insertOrders(this.orderDTO).subscribe(response=> {
+      this.snackbarService.success('Pedido concluído com sucesso! Obrigado por comprar conosco.')
+      this.openDialogSuccess();
+      this.isLoadingPayment = false;
+    }, error=>{
+      console.log(error)
+      this.snackbarService.error('Erro: ' + error.error)
+      this.isLoadingPayment = false;
+    });
   }
 
-  populate() {
-   this.orderDTO.consumer.id = this.consumer.id;
-
+  populateOrder() {
+    this.refDto.id = this.consumer.id;
+    this.orderDTO.consumer = this.refDto;
+    this.orderDTO.address = this.address;
+    this.items.forEach(cartItem=>{
+      this.orderProduct.product.id = cartItem.product.id
+      this.orderProduct.stock.id = cartItem.product.stock.id;
+      this.orderProduct.quantity = cartItem.quantity
+      this.orderProduct.unityValue = cartItem.product.stock.unityValue;
+      this.orderProducts.push(this.orderProduct);
+    });
+    this.orderDTO.orderProducts = this.orderProducts;
+    this.orderDTO.payment = this.orderPayment;
   }
 
   findUser(){
@@ -261,8 +300,25 @@ export class PaymentPageComponent implements OnInit {
         this.consumer = response as ConsumerDTO;
       },
       error => {
-
+        console.log(error)
       })
     }
   }
+
+  openDialogSuccess(){
+    const dialogRef = this.dialog.open(DialogSuccessPaymentComponent, {
+      hasBackdrop: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.cartService.createOrClearCart();
+      this.storageService.setShippingPrecoPrazo(null as any);
+      this.changePage('');
+    });
+
+  }
+
+  changePage(page: string){
+    location.href = page;
+  }
+
 }

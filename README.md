@@ -60,3 +60,4 @@ Repositório Front-end TCC
 19 Nov - Criando página de pagamentos, organizando e estilizando a página, incluindo url de imagem em categoria.<br />
 20 Nov - Deixando página funcional, verificando endereço, verificando método de pagamento, listando pedidos e verificando valor da entrega.<br />
 20 Nov - Criando mais 2 localStorages "shippingPrecoPrazo","orderAddress" fazendo validações da página de pagamento.<br />
+23 Nov - Fazendo dialog para finalizar pedido, enviando email do pedido<br />

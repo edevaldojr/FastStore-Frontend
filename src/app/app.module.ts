@@ -53,6 +53,7 @@ import { ChangePasswordComponent } from './public/pages/header-page/change-passw
 import { MatDialogModule } from '@angular/material/dialog';
 import { PaymentPageComponent } from './public/pages/payment-page/payment-page.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { DialogSuccessPaymentComponent } from './public/pages/payment-page/dialog-success-payment/dialog-success-payment.component';
 
 registerLocaleData(localePt);
 
@@ -72,6 +73,7 @@ registerLocaleData(localePt);
     ForgotPasswordComponent,
     ChangePasswordComponent,
     PaymentPageComponent,
+    DialogSuccessPaymentComponent,
   ],
   imports: [
     BrowserModule,

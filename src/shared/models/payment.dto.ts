@@ -1,4 +1,4 @@
-export interface PaymentDTO{
+export class PaymentDTO{
   numeroDeParcelas : number;
   "@type" : string;
 }

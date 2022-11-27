@@ -1,3 +1,5 @@
+import { SnackbarService } from './../../../../shared/components/snackbar/snackbar.service';
+import { StorageService } from 'src/shared/services/storage.service';
 import { HeaderPageComponent } from './../header-page/header-page.component';
 import { ProductDTO } from '../../../../shared/models/product.dto';
 import { CartService } from 'src/shared/services/cart.service';
@@ -6,6 +8,7 @@ import { Product } from '../../../../shared/models/product';
 import { ProductService } from '../../../../shared/services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -19,11 +22,13 @@ export class ProductDetailsComponent implements OnInit {
   stock: Stock;
   stockId: number;
   id: number;
+  isLogged: boolean;
   constructor( private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
     private cartService: CartService,
-    private header: HeaderPageComponent) {
+    private storage: StorageService,
+    private snackbar: SnackbarService) {
 
   }
 
@@ -52,14 +57,32 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    this.productDto = ProductDTO.toDto(this.product, this.stock)
-    this.cartService.addProduto(this.productDto);
-    this.refresh();
+    if(this.verifyIsLogged()) {
+      this.productDto = ProductDTO.toDto(this.product, this.stock)
+      this.cartService.addProduto(this.productDto);
+      this.refresh();
+    } else {
+      this.snackbar.error('Deve realizar login para adicionar produtos ao seu carrinho');
+      setTimeout(this.changePage, 3000, 'login');
+    }
 
+
+  }
+
+  verifyIsLogged(): boolean{
+    let localUser = this.storage.getLocalUser();
+    if(localUser == null){
+      return this.isLogged = false;
+    } else {
+      return this.isLogged = true;
+    }
   }
 
   refresh(){
     window.location.reload();
   }
 
+  changePage(page: string){
+    location.href = page;
+  }
 }

@@ -259,6 +259,9 @@
                   <button type="submit" class="btn btn-sm btn-block" style="background-color: rgba(238,196,243,1);">
                     Calcular valor
                   </button>
+                  <div class="btn-spin spinner">
+                    <mat-spinner *ngIf="isLoading" mode="indeterminate" diameter="30"></mat-spinner>
+                  </div>
                 </div>
               </div>
             </li>
@@ -302,12 +305,13 @@
               <span><strong>{{totalValue | currency:'BRL'}}</strong></span>
             </li>
           </ul>
-
-          <button type="button" class="btn btn-lg btn-block" (click)="finalizedPayment()" [disabled]="!formAddress.valid || !isPaymentValid" style="background-color: #f8c0f5">
-            Finalizar pagamento
-          </button>
-          <div class="btn-spin spinner">
-            <mat-spinner *ngIf="isLoading" mode="indeterminate" diameter="30"></mat-spinner>
+          <div class="btn-spin" style=" justify-content: center; display:flex">
+            <button type="button" class="btn btn-lg btn-block" (click)="finalizedPayment()" [disabled]="!formAddress.valid || !isPaymentValid" style="background-color: #f8c0f5; max-width: 70%;">
+              Finalizar pagamento
+            </button>
+            <div class="btn-spin spinner" style=" justify-content: flex-end; display:flex; align-items: center">
+              <mat-spinner *ngIf="isLoadingPayment" mode="indeterminate" diameter="30"></mat-spinner>
+            </div>
           </div>
         </div>
       </div>

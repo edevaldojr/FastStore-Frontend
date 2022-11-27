@@ -39,9 +39,11 @@ mat-expansion-panel-header:hover{
 }
 
 .btn-spin {
-  width: auto;
+  width: 100%;
   height: auto;
   display: inline-block;
+
+
 }
 
 .mat-icon {
@@ -84,8 +86,3 @@ input::-webkit-inner-spin-button {
   position: absolute;
 }
 
-.btn-spin {
-  width: auto;
-  height: auto;
-  display: inline-block;
-}
