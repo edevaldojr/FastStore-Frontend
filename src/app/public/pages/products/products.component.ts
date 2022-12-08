@@ -39,8 +39,10 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts(){
+    this.router.navigate(['products', 0]);
     this.productService.findAll(this.pageControl).subscribe((response: any)=>{
       this.products = response.content;
+      console.log(this.products)
       this.pageControl.count = response.totalElements;
       this.pageControl.page = response.pageable.pageNumber;
     });
