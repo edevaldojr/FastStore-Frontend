@@ -24,7 +24,7 @@ export class SigninComponent {
     email: "",
     password: ""
   };
-
+  isLoading: boolean;
   errorMessage: string;
 
   constructor( public auth: AuthService,
@@ -47,13 +47,16 @@ export class SigninComponent {
   }
 
   login(){
+    this.isLoading = true;
       this.auth.authenticated(this.creds)
       .subscribe(response => {
+        this.isLoading = false;
         this.credetialError = false;
         this.auth.successfulLogin(response.headers.get('Authorization') as string);
         location.href = "";
       },
       error =>{
+        this.isLoading = false;
         this.errorMessage = JSON.parse(error.error).message;
         this.snackbarService.error(this.errorMessage);
         this.credetialError = true;

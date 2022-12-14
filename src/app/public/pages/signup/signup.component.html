@@ -83,6 +83,9 @@
                               <p  class="text-danger" *ngIf="this.cpfAlreadyRegistred">
                                 Cpf já cadastrado. Tente outro!
                               </p>
+                              <div class="spinner">
+                                <mat-spinner *ngIf="isLoading" mode="indeterminate" diameter="40"></mat-spinner>
+                              </div>
                               <button type="submit" class="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm"  style="background-color: #f8c0f5;" >Criar conta</button>
                               <button (click)="changePage('login')" class="btn btn- btn-block text-uppercase mb-2 rounded-pill shadow-sm"  style="background-color: #82F4DC;">voltar</button>
                           </form>

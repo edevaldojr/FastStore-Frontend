@@ -24,3 +24,15 @@ a:hover {
   background-color: transparent;
   text-decoration: underline;
 }
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #f8c0f5;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+
+}

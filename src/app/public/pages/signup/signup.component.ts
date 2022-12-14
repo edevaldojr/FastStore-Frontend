@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit {
   emailAlreadyRegistred: boolean = false;
   cpfAlreadyRegistred: boolean = false;
   passwordErrors: string[] = new Array();
+  isLoading: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -52,11 +53,14 @@ export class SignupComponent implements OnInit {
       return;
     }
     this.isValidRegister = true;
+    this.isLoading = true;
     this.userService.registerConsumer(this.formGroup.value).subscribe((response)=>{
+      this.isLoading = false;
       this.snackbarService.success("Usuário cadastrado com sucesso! Confirme em seu email.");
       setTimeout(this.changePage, 5000, "login");
 
     },(error) =>{
+      this.isLoading = false;
       if(error.error.includes("Email já cadastrado.")){
         this.emailAlreadyRegistred = true;
       } else this.emailAlreadyRegistred = false
