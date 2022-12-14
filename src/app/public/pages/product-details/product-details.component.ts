@@ -65,9 +65,19 @@ export class ProductDetailsComponent implements OnInit {
       this.snackbar.error('Deve realizar login para adicionar produtos ao seu carrinho');
       setTimeout(this.changePage, 3000, 'login');
     }
-
-
   }
+
+  buy() {
+    if(this.verifyIsLogged()) {
+      this.productDto = ProductDTO.toDto(this.product, this.stock)
+      this.cartService.addProduto(this.productDto);
+      this.changePage('cart');
+    } else {
+      this.snackbar.error('Deve realizar login para adicionar produtos ao seu carrinho');
+      setTimeout(this.changePage, 3000, 'login');
+    }
+  }
+
 
   verifyIsLogged(): boolean{
     let localUser = this.storage.getLocalUser();

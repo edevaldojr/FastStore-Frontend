@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.pageControl.order = 'DESC';
     this.pageControl.page = 0;
-    this.pageControl.pageSize = 1;
+    this.pageControl.pageSize = 50;
     this.pageControl.count = 0;
 
     this.loadData();

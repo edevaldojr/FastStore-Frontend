@@ -18,7 +18,7 @@ const APP_ROUTES: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'cart', component: CartComponent},
   { path: 'products/:id', component: ProductsComponent},
-  { path: 'product-detail/:id', component: ProductDetailsComponent},
+  { path: 'productDetail/:id', component: ProductDetailsComponent},
   { path: 'paymentPage', component: PaymentPageComponent},
 
 ];
